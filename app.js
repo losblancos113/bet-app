@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 
 var book = require('./routes/book');
 var user = require('./routes/user');
+var bet = require('./routes/bet');
+var auth = require('./routes/auth');
 var app = express();
 
 var mongoose = require('mongoose');
@@ -22,6 +24,9 @@ app.use('/books', express.static(path.join(__dirname, 'dist')));
 app.use('/book', book);
 app.use('/users', express.static(path.join(__dirname, 'dist')));
 app.use('/user', user);
+app.use('/bets', express.static(path.join(__dirname, 'dist')));
+app.use('/bet', bet);
+app.use('/api/auth', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -21,6 +21,11 @@ router.post('/', (req, res, next) => {
   const requestObj = req.body;
   console.log(requestObj);
   const saltRounds = 11;
+  const account_balance = {
+    total: 0,
+    on_hold: 0,
+    available: 0
+  };
   // encrypt password
   bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) return next(err);
@@ -28,6 +33,7 @@ router.post('/', (req, res, next) => {
       if (err) return next(err);
       requestObj.password = hash;
       requestObj.active = false;
+      requestObj.account_balance = account_balance;
       // store in db
       User.create(requestObj, (err, post) => {
         if (err) return next(err);
